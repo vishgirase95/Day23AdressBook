@@ -7,17 +7,19 @@ namespace ConsoleApp1
 
     class Program
     {
-       
+
         public class contact
         {
             public string FirstName { get; set; }
             public string LasttName { get; set; }
+            public string City { get; set; }
+
             public double Phone { get; set; }
             public int Pincode { get; set; }
         }
 
         public static Dictionary<string, contact> AdressBook1 = new Dictionary<string, contact>();
-               
+
 
         public static void Addcontact1()
         {
@@ -27,6 +29,7 @@ namespace ConsoleApp1
             {
                 FirstName = Console.ReadLine(),
                 LasttName = Console.ReadLine(),
+                City = Console.ReadLine(),
                 Phone = Convert.ToInt64(Console.ReadLine()),
                 Pincode = Convert.ToInt32(Console.ReadLine())
             };
@@ -46,6 +49,7 @@ namespace ConsoleApp1
                 {
                     FirstName = Console.ReadLine(),
                     LasttName = Console.ReadLine(),
+                    City = Console.ReadLine(),
                     Phone = Convert.ToInt64(Console.ReadLine()),
                     Pincode = Convert.ToInt32(Console.ReadLine())
                 };
@@ -62,7 +66,7 @@ namespace ConsoleApp1
         {
             foreach (var item in AdressBook1)
             {
-                Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+                Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity ={item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
             }
         }
 
@@ -90,13 +94,32 @@ namespace ConsoleApp1
                 List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.FirstName == searchName).ToList();
                 foreach (var item in filter)
                 {
-                    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+                    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
                 }
             }
-            else { Console.WriteLine("Name is invalid");
+            else
+            {
+                Console.WriteLine("Name is invalid");
             };
         }
-
+        public static void SearcCity()
+        {
+            Console.WriteLine("Enter The city to be search");
+            string City = Console.ReadLine();
+            //if (AdressBook1.ContainsValue=City) 
+            //{
+                List<KeyValuePair<string, contact>> AdressBookList = AdressBook1.ToList();
+                List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.City == City).ToList();
+                foreach (var item in filter)
+                {
+                    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+                }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("City is invalid");
+            //};
+        }
         static void Main(string[] args)
         {
 
@@ -107,19 +130,19 @@ namespace ConsoleApp1
             {
 
 
-                Console.WriteLine("\n\nEnter Your First Name, Last Name, Phone Number, Pincode\n");
+                Console.WriteLine("\n\nEnter Your First Name, Last Name,City Name, Phone Number, Pincode\n");
                 Addcontact1();
                 Display();
 
                 string condition;
                 do
                 {
-                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person");
+                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person\nType 5 for search by city name");
                     int i = Convert.ToInt32(Console.ReadLine());
                     switch (i)
                     {
                         case 1:
-                            Console.WriteLine("Enter Your First Name, Last Name, Phone Number, Pincode\n");
+                            Console.WriteLine("Enter Your First Name, Last Name,City Name, Phone Number, Pincode\n");
                             Addcontact1();
                             Display();
                             break;
@@ -134,6 +157,9 @@ namespace ConsoleApp1
                         case 4:
                             SearchPerson();
 
+                            break;
+                        case 5:
+                            SearcCity();
                             break;
 
                         default:
