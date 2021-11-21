@@ -15,7 +15,7 @@ namespace ConsoleApp1
         }
         public static List<contact> AdressBook = new List<contact>();
         public static Dictionary<string, contact> AdressBook1 = new Dictionary<string, contact>();
-     
+
         public static void Addcontact1()
         {
 
@@ -33,38 +33,38 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Enter The contact Name to be Edit");
             string ContactName = Console.ReadLine();
-            AdressBook1.Remove(ContactName);
-            Console.WriteLine("Enter Your First Name, Last Name, Phone Number, Pincode");
-
-            contact contact1 = new contact
+            if (AdressBook1.ContainsKey(ContactName))
             {
-                FirstName = Console.ReadLine(),
-                LasttName = Console.ReadLine(),
-                Phone = Convert.ToInt64(Console.ReadLine()),
-                Pincode = Convert.ToInt32(Console.ReadLine())
-            };
-            AdressBook1.Add(contact1.FirstName, contact1);
+                AdressBook1.Remove(ContactName);
+                Console.WriteLine("Enter Your First Name, Last Name, Phone Number, Pincode");
+
+                contact contact1 = new contact
+                {
+                    FirstName = Console.ReadLine(),
+                    LasttName = Console.ReadLine(),
+                    Phone = Convert.ToInt64(Console.ReadLine()),
+                    Pincode = Convert.ToInt32(Console.ReadLine())
+                };
+                AdressBook1.Add(contact1.FirstName, contact1);
+            }
+            else
+            {
+                Console.WriteLine("The given data is not in Adressbook");
+            }
         }
         public static void Display()
         {
             foreach (var item in AdressBook1)
             {
-                Console.WriteLine($"First Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+              
+                Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
 
             }
         }
-        //public static void DicDisplay()
-        //{
-        //    foreach (var item in DicAdressBook)
-        //    {
-        //        Console.WriteLine($"Key:{item.Key}");
-        //        Console.WriteLine($"First Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
 
-        //    }
-        //}
         public static void DeleteContact()
         {
-            
+
             Console.WriteLine("Enter The contact Name to be remove");
             string ContactName = Console.ReadLine();
             if (AdressBook1.ContainsKey(ContactName))
@@ -78,43 +78,31 @@ namespace ConsoleApp1
 
             }
 
-            //contact contact1 = new contact
-            //{
-            //    FirstName = Console.ReadLine(),
-            //    LasttName = Console.ReadLine(),
-            //    Phone = Convert.ToInt64(Console.ReadLine()),
-            //    Pincode = Convert.ToInt32(Console.ReadLine())
-            //};
-            //DicAdressBook.Add(ContactName,);
+
         }
 
         static void Main(string[] args)
         {
             Console.WriteLine("Wellcome to Adress Book");
-            Console.WriteLine("Want to Add more contact yes/no");
+            Console.WriteLine("Want to Enter contact yes/no");
             string Repeate = Console.ReadLine().ToUpper();
             if (Repeate == "YES")
             {
-                while (Repeate == "YES")
-                {
-                    Console.WriteLine("Enter Your First Name, Last Name, Phone Number, Pincode");
-                    Addcontact1();
-                    Console.WriteLine("Want to Add more contact yes/no");
-                    Repeate = Console.ReadLine().ToUpper();
 
-                }
+
+                Console.WriteLine("\n\nEnter Your First Name, Last Name, Phone Number, Pincode\n");
+                Addcontact1();
                 Display();
+            
                 string condition;
-
                 do
-                { 
-                Console.WriteLine("Type 1 for ADD\nType 2 for Delete\nType 3 for Edit");
-                int i =Convert.ToInt32(Console.ReadLine());
-                
-               
+                {
+                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\n");
+                    int i = Convert.ToInt32(Console.ReadLine());
                     switch (i)
                     {
                         case 1:
+                            Console.WriteLine("Enter Your First Name, Last Name, Phone Number, Pincode\n");
                             Addcontact1();
                             Display();
                             break;
@@ -129,14 +117,14 @@ namespace ConsoleApp1
 
 
                         default:
-                            Console.WriteLine("Please Enter Valid Option");
+                            Console.WriteLine("----------Please Enter Valid Option-----------");
                             break;
 
                     }
-                    Console.WriteLine("Please Enter if you want to continue Yes/NO?");
-                    condition = Console.ReadLine().ToUpper();
+                    Console.WriteLine("\nPlease Enter if you want to continue Yes/NO?");
+                    condition = Console.ReadLine();
 
-                } while (condition=="YES");
+                } while (condition == "yes");
             }
             else
             {
