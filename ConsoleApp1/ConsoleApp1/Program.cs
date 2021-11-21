@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp1
 {
 
     class Program
     {
+       
         public class contact
         {
-            public string FirstName;
-            public string LasttName;
-            public double Phone;
-            public int Pincode;
+            public string FirstName { get; set; }
+            public string LasttName { get; set; }
+            public double Phone { get; set; }
+            public int Pincode { get; set; }
         }
-        public static List<contact> AdressBook = new List<contact>();
+
         public static Dictionary<string, contact> AdressBook1 = new Dictionary<string, contact>();
+               
 
         public static void Addcontact1()
         {
+
 
             contact contact1 = new contact
             {
@@ -52,24 +56,22 @@ namespace ConsoleApp1
                 Console.WriteLine("The given data is not in Adressbook");
             }
         }
+
+
         public static void Display()
         {
             foreach (var item in AdressBook1)
             {
-              
                 Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
-
             }
         }
 
         public static void DeleteContact()
         {
-
             Console.WriteLine("Enter The contact Name to be remove");
             string ContactName = Console.ReadLine();
             if (AdressBook1.ContainsKey(ContactName))
             {
-
                 AdressBook1.Remove(ContactName);
             }
             else
@@ -77,12 +79,27 @@ namespace ConsoleApp1
                 Console.WriteLine("Enter Name is not present in AdressBook");
 
             }
+        }
 
-
+        public static void SearchPerson()
+        {
+            string searchName = Console.ReadLine();
+            if (AdressBook1.ContainsKey(searchName))
+            {
+                List<KeyValuePair<string, contact>> AdressBookList = AdressBook1.ToList();
+                List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.FirstName == searchName).ToList();
+                foreach (var item in filter)
+                {
+                    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+                }
+            }
+            else { Console.WriteLine("Name is invalid");
+            };
         }
 
         static void Main(string[] args)
         {
+
             Console.WriteLine("Wellcome to Adress Book");
             Console.WriteLine("Want to Enter contact yes/no");
             string Repeate = Console.ReadLine().ToUpper();
@@ -93,11 +110,11 @@ namespace ConsoleApp1
                 Console.WriteLine("\n\nEnter Your First Name, Last Name, Phone Number, Pincode\n");
                 Addcontact1();
                 Display();
-            
+
                 string condition;
                 do
                 {
-                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\n");
+                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person");
                     int i = Convert.ToInt32(Console.ReadLine());
                     switch (i)
                     {
@@ -114,7 +131,10 @@ namespace ConsoleApp1
                             EditContact1();
                             Display();
                             break;
+                        case 4:
+                            SearchPerson();
 
+                            break;
 
                         default:
                             Console.WriteLine("----------Please Enter Valid Option-----------");
