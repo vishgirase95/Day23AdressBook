@@ -17,14 +17,16 @@ namespace ConsoleApp1
             public double Phone { get; set; }
             public int Pincode { get; set; }
         }
-
+      
         public static Dictionary<string, contact> AdressBook1 = new Dictionary<string, contact>();
+        public static Dictionary<string, contact> AdressBook2 = new Dictionary<string, contact>();
 
-
+        public List<KeyValuePair<string,contact>> ListAdress2 = AdressBook1.ToList();
+       
         public static void Addcontact1()
         {
 
-
+            
             contact contact1 = new contact
             {
                 FirstName = Console.ReadLine(),
@@ -87,41 +89,55 @@ namespace ConsoleApp1
 
         public static void SearchPerson()
         {
-            string searchName = Console.ReadLine();
-            if (AdressBook1.ContainsKey(searchName))
-            {
-                List<KeyValuePair<string, contact>> AdressBookList = AdressBook1.ToList();
-                List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.FirstName == searchName).ToList();
-                foreach (var item in filter)
-                {
-                    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Name is invalid");
-            };
+            string name = Console.ReadLine();
+            var SearchName = AdressBook1.Where(x => x.Key == name).FirstOrDefault();
+          Console.WriteLine($"\nFirst Name : {SearchName.Value.FirstName}\nLast Name ={SearchName.Value.LasttName}\nCity :{SearchName.Value.City}\nNumber ={SearchName.Value.Phone}\nPincode={SearchName.Value.Pincode}");
+
+            //string searchName = Console.ReadLine();
+            //if (AdressBook1.ContainsKey(searchName))
+            //{
+            //    List<KeyValuePair<string, contact>> AdressBookList = AdressBook1.ToList();
+            //    List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.FirstName == searchName).ToList();
+            //    foreach (var item in filter)
+            //    {
+            //        Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Name is invalid");
+            //};
         }
         public static void SearcCity()
         {
             Console.WriteLine("Enter The city to be search");
             string City = Console.ReadLine();
+             var SearchCity=  AdressBook1.Where(x => x.Value.City == City).FirstOrDefault();
+
+            Console.WriteLine($"\nFirst Name : {SearchCity.Value.FirstName}\nLast Name ={SearchCity.Value.LasttName}\nCity :{SearchCity.Value.City}\nNumber ={SearchCity.Value.Phone}\nPincode={SearchCity.Value.Pincode}");
+
             //if (AdressBook1.ContainsValue=City) 
             //{
-                List<KeyValuePair<string, contact>> AdressBookList = AdressBook1.ToList();
-                List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.City == City).ToList();
-                foreach (var item in filter)
-                {
-                    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
-                }
+            //List<KeyValuePair<string, contact>> AdressBookList = AdressBook1.ToList();
+            //List<KeyValuePair<string, contact>> filter = AdressBookList.FindAll(x => x.Value.City == City).ToList();
+            //foreach (var item in filter)
+            //{
+            //    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+            //}
             //}
             //else
             //{
             //    Console.WriteLine("City is invalid");
             //};
         }
+
+
         static void Main(string[] args)
         {
+
+
+
+         
 
             Console.WriteLine("Wellcome to Adress Book");
             Console.WriteLine("Want to Enter contact yes/no");
@@ -156,12 +172,16 @@ namespace ConsoleApp1
                             break;
                         case 4:
                             SearchPerson();
+                            //foreach (var item in ListAdress2)
+                            //{
+                            //    Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity :{item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
 
+                            //}
                             break;
                         case 5:
                             SearcCity();
                             break;
-
+                  
                         default:
                             Console.WriteLine("----------Please Enter Valid Option-----------");
                             break;
