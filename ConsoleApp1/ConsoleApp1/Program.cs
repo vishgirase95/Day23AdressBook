@@ -108,6 +108,14 @@ namespace ConsoleApp1
             //    Console.WriteLine("Name is invalid");
             //};
         }
+        public static void CountByCity()
+        {
+            Console.WriteLine("Enter The city to be search");
+            string CityName = Console.ReadLine();
+            var CityCount = AdressBook1.Count(x => x.Value.City == CityName);
+
+            Console.WriteLine($"The is number of {CityName} is {CityCount} ");
+        }
         public static void SearcCity()
         {
             Console.WriteLine("Enter The city to be search");
@@ -153,7 +161,7 @@ namespace ConsoleApp1
                 string condition;
                 do
                 {
-                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person\nType 5 for search by city name");
+                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person\nType 5 for search by city name\n Type 6 for Count City");
                     int i = Convert.ToInt32(Console.ReadLine());
                     switch (i)
                     {
@@ -180,6 +188,9 @@ namespace ConsoleApp1
                             break;
                         case 5:
                             SearcCity();
+                            break;
+                        case 6:
+                            CountByCity();
                             break;
                   
                         default:
