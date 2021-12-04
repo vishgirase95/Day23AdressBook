@@ -17,16 +17,16 @@ namespace ConsoleApp1
             public double Phone { get; set; }
             public int Pincode { get; set; }
         }
-      
+
         public static Dictionary<string, contact> AdressBook1 = new Dictionary<string, contact>();
         public static Dictionary<string, contact> AdressBook2 = new Dictionary<string, contact>();
 
-        public List<KeyValuePair<string,contact>> ListAdress2 = AdressBook1.ToList();
-       
+        public List<KeyValuePair<string, contact>> ListAdress2 = AdressBook1.ToList();
+
         public static void Addcontact1()
         {
 
-            
+
             contact contact1 = new contact
             {
                 FirstName = Console.ReadLine(),
@@ -89,9 +89,11 @@ namespace ConsoleApp1
 
         public static void SearchPerson()
         {
+            Console.WriteLine("Enter Person Name to search");
+
             string name = Console.ReadLine();
             var SearchName = AdressBook1.Where(x => x.Key == name).FirstOrDefault();
-          Console.WriteLine($"\nFirst Name : {SearchName.Value.FirstName}\nLast Name ={SearchName.Value.LasttName}\nCity :{SearchName.Value.City}\nNumber ={SearchName.Value.Phone}\nPincode={SearchName.Value.Pincode}");
+            Console.WriteLine($"\nFirst Name : {SearchName.Value.FirstName}\nLast Name ={SearchName.Value.LasttName}\nCity :{SearchName.Value.City}\nNumber ={SearchName.Value.Phone}\nPincode={SearchName.Value.Pincode}");
 
             //string searchName = Console.ReadLine();
             //if (AdressBook1.ContainsKey(searchName))
@@ -120,7 +122,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Enter The city to be search");
             string City = Console.ReadLine();
-             var SearchCity=  AdressBook1.Where(x => x.Value.City == City).FirstOrDefault();
+            var SearchCity = AdressBook1.Where(x => x.Value.City == City).FirstOrDefault();
 
             Console.WriteLine($"\nFirst Name : {SearchCity.Value.FirstName}\nLast Name ={SearchCity.Value.LasttName}\nCity :{SearchCity.Value.City}\nNumber ={SearchCity.Value.Phone}\nPincode={SearchCity.Value.Pincode}");
 
@@ -138,14 +140,23 @@ namespace ConsoleApp1
             //    Console.WriteLine("City is invalid");
             //};
         }
+        public static void SortingByName()
+        {
+            Console.WriteLine("This is sortig");
 
+            foreach (var item in AdressBook1.OrderBy(key => key.Key)) 
+            {
+                Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity ={item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+            }
+
+        }
 
         static void Main(string[] args)
         {
 
 
 
-         
+
 
             Console.WriteLine("Wellcome to Adress Book");
             Console.WriteLine("Want to Enter contact yes/no");
@@ -192,7 +203,10 @@ namespace ConsoleApp1
                         case 6:
                             CountByCity();
                             break;
-                  
+                        case 7:
+                            SortingByName();
+                            break;
+
                         default:
                             Console.WriteLine("----------Please Enter Valid Option-----------");
                             break;
