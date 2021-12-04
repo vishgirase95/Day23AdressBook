@@ -142,7 +142,7 @@ namespace ConsoleApp1
         }
         public static void SortingByName()
         {
-            Console.WriteLine("This is sortig");
+            Console.WriteLine("This is sortig By Name");
 
             foreach (var item in AdressBook1.OrderBy(key => key.Key)) 
             {
@@ -150,7 +150,16 @@ namespace ConsoleApp1
             }
 
         }
+        public static void SortingByCity()
+        {
+            Console.WriteLine("This is sortig By City");
 
+            foreach (var item in AdressBook1.OrderBy(key => key.Value.City))
+            {
+                Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity ={item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
+            }
+
+        }
         static void Main(string[] args)
         {
 
@@ -172,7 +181,7 @@ namespace ConsoleApp1
                 string condition;
                 do
                 {
-                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person\nType 5 for search by city name\n Type 6 for Count City");
+                    Console.WriteLine("\n\n\nType 1 for ADD\nType 2 for Delete\nType 3 for Edit\nType 4 for Search Person\nType 5 for search by city name\n Type 6 for Count City\n Sort By City name");
                     int i = Convert.ToInt32(Console.ReadLine());
                     switch (i)
                     {
@@ -205,6 +214,9 @@ namespace ConsoleApp1
                             break;
                         case 7:
                             SortingByName();
+                            break;
+                        case 8:
+                            SortingByCity();
                             break;
 
                         default:
