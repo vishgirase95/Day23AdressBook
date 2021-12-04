@@ -1,6 +1,10 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+
 
 namespace ConsoleApp1
 {
@@ -144,7 +148,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine("This is sortig By Name");
 
-            foreach (var item in AdressBook1.OrderBy(key => key.Key)) 
+            foreach (var item in AdressBook1.OrderBy(key => key.Key))
             {
                 Console.WriteLine($"\nFirst Name : {item.Value.FirstName}\nLast Name ={item.Value.LasttName}\nCity ={item.Value.City}\nNumber ={item.Value.Phone}\nPincode={item.Value.Pincode}");
             }
@@ -160,6 +164,31 @@ namespace ConsoleApp1
             }
 
         }
+        public static void writeInCsv()
+        {
+            string CSVofDic = @"D:\bridgelabz\Day23AdressBook\ConsoleApp1\StremWay.csv";
+            using (var writer = new StreamWriter(CSVofDic))
+            {
+                foreach (var pair in AdressBook1)
+                {
+                    writer.WriteLine($"{pair.Value.FirstName},{pair.Value.LasttName},{pair.Value.City},{pair.Value.Phone},{pair.Value.Pincode}");
+
+                }
+            }
+            //using (var reader = new StreamReader(CSVofDic))
+            //using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            //{
+            //    var records = csv.GetRecords<adressdata>().ToList();
+
+            //}
+
+            // String csv = String.Join(
+            //Environment.NewLine,
+            // AdressBook1.Select(d => $"{d.Key},{d.Value.LasttName},{d.Value.Phone},{d.Value.Pincode}"));
+            // System.IO.File.WriteAllText(CSVofDic, csv);
+        }
+
+
         static void Main(string[] args)
         {
 
@@ -217,6 +246,9 @@ namespace ConsoleApp1
                             break;
                         case 8:
                             SortingByCity();
+                            break;
+                        case 9:
+                            writeInCsv();
                             break;
 
                         default:
